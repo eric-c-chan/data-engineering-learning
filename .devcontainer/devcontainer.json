@@ -2,30 +2,20 @@
     "name": "Data Engineering Learning",
     "image": "mcr.microsoft.com/devcontainers/python:3.11",
     "features": {
-        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-        "ghcr.io/devcontainers/features/postgresql:1": {
-            "version": "latest"
-        },
-        "ghcr.io/devcontainers/features/common-utils:2": {
-            "installZsh": true,
-            "installOhMyZsh": true
-        }
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
     },
     "customizations": {
         "vscode": {
             "extensions": [
                 "ms-python.python",
-                "ms-python.vscode-pylance",
+                "ms-python.vscode-pylance", 
                 "ms-toolsai.jupyter",
-                "ms-vscode.vscode-json",
-                "bradlc.vscode-tailwindcss",
                 "ms-azuretools.vscode-docker",
-                "mtxr.sqltools",
-                "mtxr.sqltools-driver-pg"
+                "mtxr.sqltools"
             ]
         }
     },
-    "postCreateCommand": "pip install pandas numpy matplotlib seaborn jupyter apache-airflow",
+    "postCreateCommand": "sudo apt-get update && sudo apt-get install -y postgresql postgresql-contrib && sudo service postgresql start && sudo -u postgres createuser -s vscode && sudo -u postgres createdb vscode && pip install pandas numpy matplotlib seaborn jupyter sqlalchemy psycopg2-binary requests python-dotenv",
     "forwardPorts": [8080, 5432, 8888],
     "remoteUser": "vscode"
 }
